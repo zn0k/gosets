@@ -42,7 +42,8 @@ func (s *Set[T]) In(item T) bool {
 }
 
 func (s *Set[T]) NotIn(item T) bool {
-	return !s.In(item)
+	_, ok := s.m[item]
+	return !ok
 }
 
 func (s *Set[T]) IsDisjoint(other Set[T]) bool {
