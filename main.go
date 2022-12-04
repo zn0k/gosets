@@ -10,6 +10,12 @@ func New[T comparable]() Set[T] {
 	return s
 }
 
+func FromIterable[T comparable](items []T) Set[T] {
+	s := New[T]()
+	s.AddMany(items)
+	return s
+}
+
 func (s *Set[T]) Add(item T) {
 	s.m[item] = struct{}{}
 }
@@ -53,7 +59,7 @@ func (s *Set[T]) IsDisjoint(other Set[T]) bool {
 
 func (s *Set[T]) IsSubset(other Set[T]) bool {
 	result := true
-	for key, _ := range s.m {
+	for key := range s.m {
 		_, ok := other.m[key]
 		if !ok {
 			result = false
@@ -65,7 +71,7 @@ func (s *Set[T]) IsSubset(other Set[T]) bool {
 
 func (s *Set[T]) IsSuperset(other Set[T]) bool {
 	result := true
-	for key, _ := range other.m {
+	for key := range other.m {
 		_, ok := s.m[key]
 		if !ok {
 			result = false

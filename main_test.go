@@ -280,3 +280,10 @@ func TestCopy(t *testing.T) {
 		t.Errorf("c does not contain 3")
 	}
 }
+
+func TestFromIterable(t *testing.T) {
+	s := FromIterable([]int{1, 2, 3, 4, 5})
+	if s.Len() != 5 {
+		t.Errorf("length should be 5, is %d", s.Len())
+	}
+}
